@@ -11,7 +11,7 @@ interface CVE {
 }
 
 interface ThreatFeedProps {
-  onStatsUpdate?: (stats: { total: number; critical: number; high: number; medium: number; low: number }) => void;
+  onStatsUpdate?: (stats: { total: number; critical: number; high: number; medium: number; low: number; unknown: number }) => void;
 }
 
 export default function ThreatFeed({ onStatsUpdate }: ThreatFeedProps) {
@@ -50,7 +50,8 @@ export default function ThreatFeed({ onStatsUpdate }: ThreatFeedProps) {
           const high = sliced.filter((c: CVE) => c.cvss !== null && c.cvss >= 7 && c.cvss < 9).length;
           const medium = sliced.filter((c: CVE) => c.cvss !== null && c.cvss >= 4 && c.cvss < 7).length;
           const low = sliced.filter((c: CVE) => c.cvss !== null && c.cvss < 4).length;
-          onStatsUpdate({ total: sliced.length, critical, high, medium, low });
+          const unknown = sliced.filter((c: CVE) => c.cvss === null).length;
+          onStatsUpdate({ total: sliced.length, critical, high, medium, low, unknown });
         }
       } catch (err) {
         console.error(err);

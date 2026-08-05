@@ -6,7 +6,7 @@ import ThreatFeed from "@/components/ThreatFeed";
 import SeverityChart from "@/components/SeverityChart";
 
 export default function Home() {
-  const [stats, setStats] = useState({ total: 0, critical: 0, high: 0, medium: 0, low: 0 });
+  const [stats, setStats] = useState({ total: 0, critical: 0, high: 0, medium: 0, low: 0, unknown: 0 });
   const [lastUpdated, setLastUpdated] = useState<string>("");
 
   const handleStatsUpdate = useCallback((newStats: typeof stats) => {
