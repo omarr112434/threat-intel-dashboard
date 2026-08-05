@@ -23,7 +23,6 @@ export default function SeverityChart({ stats }: SeverityChartProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const total = data.reduce((sum, d) => sum + d.value, 0);
   if (!mounted) return <div className="h-[300px] w-full mt-4 flex items-center justify-center text-slate-500">Loading chart...</div>;
 
   return (
