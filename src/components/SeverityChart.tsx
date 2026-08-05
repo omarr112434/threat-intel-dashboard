@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
 interface SeverityChartProps {
@@ -14,7 +15,12 @@ export default function SeverityChart({ stats }: SeverityChartProps) {
     { name: "Low", value: stats?.low ?? 351, color: "#22c55e" },
   ];
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const total = data.reduce((sum, d) => sum + d.value, 0);
+
+  if (!mounted) return <div className="h-[300px] w-full mt-4 flex items-center justify-center text-slate-500">Loading chart...</div>;
 
   return (
     <div className="h-[300px] w-full mt-4 relative">
