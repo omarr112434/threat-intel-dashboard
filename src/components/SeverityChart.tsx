@@ -23,33 +23,31 @@ export default function SeverityChart({ stats }: SeverityChartProps) {
   if (!mounted) return <div className="h-[300px] w-full mt-4 flex items-center justify-center text-slate-500">Loading chart...</div>;
 
   return (
-    <div className="h-[300px] w-full mt-4 relative">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={100}
-            paddingAngle={5}
-            dataKey="value"
-            stroke="rgba(51, 65, 85, 0.5)"
-            animationBegin={0}
-            animationDuration={800}
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
-          </Pie>
-          <Tooltip 
-            contentStyle={{ backgroundColor: "#1e293b", borderColor: "#334155", borderRadius: "8px" }}
-            itemStyle={{ color: "#f8fafc" }}
-            formatter={(value: number) => [`${value} (${((value / total) * 100).toFixed(1)}%)`, '']}
-          />
-          <Legend verticalAlign="bottom" height={36} />
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="h-[300px] w-full mt-4 relative flex justify-center items-center">
+      <PieChart width={350} height={300}>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          innerRadius={60}
+          outerRadius={100}
+          paddingAngle={5}
+          dataKey="value"
+          stroke="rgba(51, 65, 85, 0.5)"
+          animationBegin={0}
+          animationDuration={800}
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
+        <Tooltip 
+          contentStyle={{ backgroundColor: "#1e293b", borderColor: "#334155", borderRadius: "8px" }}
+          itemStyle={{ color: "#f8fafc" }}
+          formatter={(value: number) => [`${value} (${((value / total) * 100).toFixed(1)}%)`, '']}
+        />
+        <Legend verticalAlign="bottom" height={36} />
+      </PieChart>
     </div>
   );
 }
