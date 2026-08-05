@@ -46,11 +46,11 @@ export default function ThreatFeed({ onStatsUpdate }: ThreatFeedProps) {
 
         // Calculate live stats
         if (onStatsUpdate) {
-          const critical = sliced.filter((c: CVE) => c.cvss !== null && c.cvss >= 9).length;
-          const high = sliced.filter((c: CVE) => c.cvss !== null && c.cvss >= 7 && c.cvss < 9).length;
-          const medium = sliced.filter((c: CVE) => c.cvss !== null && c.cvss >= 4 && c.cvss < 7).length;
-          const low = sliced.filter((c: CVE) => c.cvss !== null && c.cvss < 4).length;
-          const unknown = sliced.filter((c: CVE) => c.cvss === null).length;
+          const critical = sliced.filter((c: CVE) => c.cvss != null && c.cvss >= 9).length;
+          const high = sliced.filter((c: CVE) => c.cvss != null && c.cvss >= 7 && c.cvss < 9).length;
+          const medium = sliced.filter((c: CVE) => c.cvss != null && c.cvss >= 4 && c.cvss < 7).length;
+          const low = sliced.filter((c: CVE) => c.cvss != null && c.cvss < 4).length;
+          const unknown = sliced.length - (critical + high + medium + low);
           onStatsUpdate({ total: sliced.length, critical, high, medium, low, unknown });
         }
       } catch (err) {
